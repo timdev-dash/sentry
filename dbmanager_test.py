@@ -1,5 +1,6 @@
 import unittest
 import sqlite3
+import json
 from dbmanager import Database
 
 class TestDatabaseClass(unittest.TestCase):
@@ -105,7 +106,6 @@ class TestDatabaseClass(unittest.TestCase):
         cursor = data8.cursor()
         test_result8 = cursor.execute("SELECT name FROM sqlite_master WHERE type='table';") 
         name_1 = test_result8.fetchone()[0]
-        print(name_1)
         self.assertEqual('table_test', name_1)
         data8.commit()
         data8.close()
@@ -153,6 +153,30 @@ class TestDatabaseClass(unittest.TestCase):
         self.assertEqual(4321, test_result11)
         data11.commit()
         data11.close()
+
+    ## 12. Returns ture if the dictionary is properly inserted to a table
+    def test_insert_data_json(self):
+        test12_database = Database('testdb12.sqlite')
+        test12_table = 'Incoming'
+        test12_header = 'Payload JSON'
+        test12_dict = {'message': 'Olo webhook test!'}
+        test12_json_string = json.dumps(test12_dict, indent=4)
+        jsonFile = open('test12.json', 'w')
+        jsonFile.write(test12_json_string)
+        jsonFile.close()
+        jsonFile = open('test12.json', 'r')
+        jsonReading = str(jsonFile.read())
+        test12_json = jsonReading
+        jsonFile.close()
+        text_to_input = str(test12_json)
+        test12_database.db_create(test12_table, [test12_header,])
+        test12_database.db_insert(test12_table, [text_to_input,])
+        data12 = sqlite3.connect('testdb12.sqlite')
+        cursor = data12.cursor()
+        test12_result = cursor.execute('SELECT Payload FROM Incoming').fetchone()[0]
+        self.assertEqual('{"message": "Olo webhook test"}', test12_result)
+        data12.commit()
+        data12.close()
 
 
 ### Makes sure the unittests run, important!!! ###
