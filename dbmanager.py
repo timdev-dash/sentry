@@ -100,7 +100,7 @@ class Database():
             ### Adds the table data to the insert statement ###
             i = 0
             while i < len(insert_data):
-                iq += insert_data[i]
+                iq += "'" + insert_data[i] + "'"
                 if i == len(insert_data) - 1:
                     pass
                 else:

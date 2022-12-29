@@ -10,8 +10,9 @@ class TestDatabaseClass(unittest.TestCase):
         create_data = ['header1_test TEXT',]
         self.test_database.db_create(create_name, create_data)
         insert_name = 'table_test'
-        insert_data = ['More Testing',]
-        self.test_database.db_insert(insert_name, insert_data)
+        insert_text = ['More Testing',]
+        self.test_database.db_insert(insert_name, insert_text)
+
 
     ## 1. Returns true if Database returns a Database
     def test_database_creation(self):
@@ -96,19 +97,33 @@ class TestDatabaseClass(unittest.TestCase):
         cursor = data9.cursor()
         header_list = cursor.execute("PRAGMA table_info(table_test)")
         header_1 = cursor.fetchone()
-        print(header_1)
         self.assertEqual('header1_test', header_1[1])
         data9.commit()
         data9.close() 
 
-    ## 10. Returns true if the insert function inserts into at table with the correct data
-    def test_insert_data(self):
+    ## 10. Returns true if the insert function inserts into at table with the correct data as text
+    def test_insert_data_text(self):
         data10 = sqlite3.connect('testdb.sqlite')
         cursor = data10.cursor()
         test_result10 = cursor.execute('SELECT header1_test FROM table_test').fetchone()[0]
         self.assertEqual('More Testing', test_result10)
         data10.commit()
         data10.close()
+    
+    ## 11. Returns true if the insert function inserts into a table with the correct data as integers
+    def test_insert_data_number(self):
+        test11_database = Database('testdb11.sqlite')
+        test11_table = 'test11_table'
+        test11_header = ['test11_int_header INTEGER',]
+        test11_int = ['4321',]
+        test11_database.db_create(test11_table, test11_header)
+        test11_database.db_insert(test11_table, test11_int)
+        data11 = sqlite3.connect('testdb11.sqlite')
+        cursor = data11.cursor()
+        test_result11 = cursor.execute('SELECT test11_int_header FROM test11_table').fetchone()[0]
+        self.assertEqual(4321, test_result11)
+        data11.commit()
+        data11.close()
 
 
 ### Makes sure the unittests run, important!!! ###
