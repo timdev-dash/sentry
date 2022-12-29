@@ -17,7 +17,7 @@ def catering_receipt():
 
         ## Setting logic to receive and file received webhooks 
         if request.method == 'POST':
-                webhook = str(request.join)
+                webhook = str(request.json)
                 print(webhook)
                 print(type(webhook))
                 text_to_insert = str(webhook)
