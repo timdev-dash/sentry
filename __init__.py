@@ -18,21 +18,18 @@ def catering_receipt():
         ## Setting logic to receive and file received webhooks 
         if request.method == 'POST':
                 webhook = str(request.json)
-                print(webhook)
-                print(type(webhook))
                 text_to_insert = str(webhook)
-                print(text_to_insert)
-                print(type(text_to_insert))
                 db.db_insert(table_name, [text_to_insert,])
+                print('Catering webhook received')
                 
                 ### Sending the required HTTP 200 response communicating receipt of webhook
-                return '', 200
+                return 'Catering webhook successfully received', 200
         elif request.method == 'GET':
-                return 'Test Succesful', 201
+                return 'Catering Test Succesful', 201
 
 
 
-@app.route("/monitor", methods=['POST']) # creating receotpion point for mealtime webhooks
+@app.route("/monitor", methods=['POST', 'GET']) # creating receotpion point for mealtime webhooks
 def monitor_receipt():
         ## Setting default database settings for insert functions
         db_name = 'online_in.sqlite'
@@ -43,9 +40,12 @@ def monitor_receipt():
         if request.method == 'POST':
                 text_to_insert = str(request.json)
                 db.db_insert(table_name, [text_to_insert,])
-                
+                print('Online webhook received')
+
                 ### Sending the required HTTP 200 response communicating receipt of webhook
-                return '', 200
+                return 'Online webhook successfully received', 200
+        elif request.method == 'GET':
+                return 'Online Test Successful', 201
 
 if __name__ == "__main__":
     app.run()
