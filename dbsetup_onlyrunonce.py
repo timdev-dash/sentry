@@ -42,7 +42,7 @@ def online_in():
     '''    
     
     ### The database file name should be online_in.sqlite ###
-    db_name = 'onilne_in.sqlite'
+    db_name = 'online_in.sqlite'
 
     ### There will only be one table in the database containing the text of the complete JSON ###
     ### payload sent from OLO. The table name will be incoming, the header name will be payload ###
