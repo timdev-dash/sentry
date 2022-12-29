@@ -19,6 +19,7 @@ def catering_receipt():
         if request.method == 'POST':
                 text_to_insert = str(request.json)
                 print(text_to_insert)
+                print(type(text_to_insert))
                 db.db_insert(table_name, [text_to_insert,])
                 
                 ### Sending the required HTTP 200 response communicating receipt of webhook
