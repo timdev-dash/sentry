@@ -10,3 +10,4 @@ When updating the scripts, the following needs to be done.
 3. Stop and restart Gunicorn
     pkill -f gunicorn 
     guincorn --chdir './sentry' -w 3 sentry:app
+
