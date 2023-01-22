@@ -130,3 +130,6 @@ dmypy.json
 
 # SQLDB documents
 *.sqlite
+catering_in.sqlite
+online_in.sqlite
+testcatering_in.sqlite
