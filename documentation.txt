@@ -11,3 +11,10 @@ When updating the scripts, the following needs to be done.
     pkill -f gunicorn 
     guincorn --chdir './sentry' -w 3 sentry:app
 
+Dowloading files via SSH
+
+Use command prompt
+Type in 'sftp "Username@ip"'
+Type in SSH password
+To upload files use get 'file location from main (ie: /root/sentry/testfilename.txt)'
+To donwload files use put 'File location on computer (ie: C:/Users/TimScott/FolderName/testfilename.txt)' 'Placement location on server (ie: /root/sentry)'

@@ -23,14 +23,16 @@ def catering_in():
     ### and the data type will be text. ###
 
     table_name = 'Incoming'
-    header1 = 'Payload TEXT'
+    header1 = 'Header TEXT'
+    header2 = 'Payload TEXT'
 
     ### Creates the database file for use ###
     db = Database(db_name)
 
     ### Creates the table for use ###
-    db.db_create(table_name, [header1,])
+    db.db_create(table_name, [header1, header2])
 
+"""
 ### The online_in Database setup
 def online_in():
     ''' The method to create the online_in Database
@@ -56,7 +58,7 @@ def online_in():
 
     ### Creates the table for use ###
     db.db_create(table_name, [header1,])
-
+"""
 if __name__ == "__main__":
-    online_in()
+    #online_in()
     catering_in()

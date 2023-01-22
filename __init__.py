@@ -17,9 +17,11 @@ def catering_receipt():
 
         ## Setting logic to receive and file received webhooks 
         if request.method == 'POST':
+                header = str(request.headers)
                 webhook = str(request.json)
-                text_to_insert = str(webhook)
-                db.db_insert(table_name, [text_to_insert,])
+                header_to_insert = str(header)
+                webhook_to_insert = str(webhook)
+                db.db_insert(table_name, [header_to_insert, webhook_to_insert,])
                 print('Catering webhook received')
                 
                 ### Sending the required HTTP 200 response communicating receipt of webhook
