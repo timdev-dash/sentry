@@ -128,8 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Test documents
-testdb.sqlite
-testdb1.sqlite
-testdb2.sqlite
-testdb11.sqlite
+# SQLDB documents
+.sqlite
